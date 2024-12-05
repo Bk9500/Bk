@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farhan's Birthday Puzzle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .question {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .option {
+            font-size: 16px;
+            padding: 10px;
+        }
+        .heart {
+            color: red;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Step 1: Welcome and Name Input -->
+    <div id="welcome" class="visible">
+        <h1>Welcome</h1>
+        <h2>What's your Name?</h2>
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button onclick="checkName()">Submit</button>
+    </div>
+
+    <!-- Step 2: Are you a Monkey -->
+    <div id="question1" class="hidden">
+        <h2>Are uhh Monkey?</h2>
+        <button class="option" id="yes1" onclick="nextQuestion('question2')">Yes</button>
+        <button class="option" id="no1" onmouseover="changeNoToYes('yes1')">No</button>
+    </div>
+
+    <!-- Step 3: Are you Dumb -->
+    <div id="question2" class="hidden">
+        <h2>Are uhh Dumb?</h2>
+        <button class="option" id="yes2" onclick="nextQuestion('question3')">Yes</button>
+        <button class="option" id="no2" onclick="disableClick()">No</button>
+    </div>
+
+    <!-- Step 4: Are you Stupid -->
+    <div id="question3" class="hidden">
+        <h2>Are uhh Stupid?</h2>
+        <button class="option" id="yes3" onclick="nextQuestion('question4')">Yes</button>
+        <button class="option" id="no3" onclick="disableClick()">No</button>
+    </div>
+
+    <!-- Step 5: Hii Stupid Dumb Monkey -->
+    <div id="question4" class="hidden">
+        <h2>Hii Stupid Dumb Monkey 🐒</h2>
+        <button class="option" id="yes4" onclick="nextQuestion('question5')">Yes</button>
+        <button class="option" id="no4" onclick="disableClick()">No</button>
+    </div>
+
+    <!-- Step 6: Are you Enjoying -->
+    <div id="question5" class="hidden">
+        <h2>Are uhh Enjoying?</h2>
+        <button class="option" id="yes5" onclick="nextQuestion('question6')">Yes</button>
+        <button class="option" id="no5" onclick="disableClick()">No</button>
+    </div>
+
+    <!-- Step 7: What's the Date Today -->
+    <div id="question6" class="hidden">
+        <h2>What's the Date today?</h2>
+        <button class="option" id="date1" onclick="checkDate('6')">6th December 2024</button>
+        <button class="option" id="date2" onclick="checkDate('5')">5th December 2024</button>
+    </div>
+
+    <!-- Step 8: Birthday Message -->
+    <div id="birthday" class="hidden">
+        <h2>Ooh 😯 It's your Birthday!</h2>
+        <button class="option" id="yes6" onclick="showBirthdayMessage()">Yes</button>
+        <button class="option" id="no6" onclick="disableClick()">No</button>
+    </div>
+
+    <!-- Step 9: Happy Birthday Message -->
+    <div id="happyBirthday" class="hidden">
+        <h2><span class="heart">❤️</span> Happy Birthday My Fiance Asli Farhan Haider</h2>
+        <button class="option" onclick="unpackGift()">Unpack your gift</button>
+    </div>
+
+    <!-- Step 10: Kiss Animation -->
+    <div id="kiss" class="hidden">
+        <h2>💋</h2>
+        <p>Enjoy your birthday gift! 💋</p>
+    </div>
+
+    <script>
+        function checkName() {
+            var name = document.getElementById("nameInput").value;
+            if (name.toLowerCase() === "farhan") {
+                document.getElementById("welcome").classList.add("hidden");
+                document.getElementById("question1").classList.remove("hidden");
+            } else {
+                alert("Invalid name. Please try again.");
+            }
+        }
+
+        function changeNoToYes(yesButton) {
+            document.getElementById(yesButton).innerText = "Yes";
+        }
+
+        function nextQuestion(nextDiv) {
+            var currentDiv = event.target.parentElement.id;
+            document.getElementById(currentDiv).classList.add("hidden");
+            document.getElementById(nextDiv).classList.remove("hidden");
+        }
+
+        function disableClick() {
+            event.preventDefault();
+        }
+
+        function checkDate(date) {
+            if (date === '6') {
+                document.getElementById("question6").classList.add("hidden");
+                document.getElementById("birthday").classList.remove("hidden");
+            } else {
+                alert("Please select the correct date.");
+            }
+        }
+
+        function showBirthdayMessage() {
+            document.getElementById("birthday").classList.add("hidden");
+            document.getElementById("happyBirthday").classList.remove("hidden");
+        }
+
+        function unpackGift() {
+            document.getElementById("happyBirthday").classList.add("hidden");
+            document.getElementById("kiss").classList.remove("hidden");
+            var kisses = 5;
+            setInterval(function() {
+                if (kisses > 0) {
+                    var kiss = document.createElement('p');
+                    kiss.innerText = '💋';
+                    document.getElementById("kiss").appendChild(kiss);
+                    kisses--;
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
